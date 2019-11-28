@@ -709,7 +709,8 @@ extension VGPlayerView {
             guard let strongSelf = self else { return }
             make.left.equalTo(strongSelf)
             make.right.equalTo(strongSelf)
-            make.bottom.equalTo(strongSelf)
+            var offsetBottom = isiPhoneX() ? -20 : 0
+            make.bottom.equalTo(strongSelf).offset(offsetBottom)
             make.height.equalTo(52)
         }
         
@@ -749,5 +750,13 @@ extension VGPlayerView {
             make.height.equalTo(30)
             make.width.equalTo(30)
         }
+    }
+    fileprivate func isiPhoneX() -> Bool {
+        if UIScreen.main.bounds.height == 812 {
+            return true
+        } else if UIApplication.shared.statusBarFrame.height == 44 {
+            return true
+        }
+        return false
     }
 }
